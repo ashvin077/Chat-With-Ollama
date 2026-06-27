@@ -1,0 +1,14 @@
+# venv folder
+venv/
+
+# file uploaded folder
+uploads/
+
+# .env file
+.env
+
+# test file
+test.py
+
+
+

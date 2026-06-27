@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chat Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>AI Hub</h2>
+            <ul>
+                <li id="chatTab" class="active" onclick="showTab('chat')">💬 Chat</li>
+                <li id="summarizeTab" onclick="showTab('summarize')">📄 Summarize File</li>
+                <li id="qaTab" onclick="showTab('qa')">❓ File Q&A</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Chat Tab -->
+            <div id="chat" class="tab-content active">
+                <div id="chat-messages" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="message" placeholder="Type your message..." onkeydown="if(event.key==='Enter'){sendMessage();}">
+                    <button id="sendBtn" onclick="sendMessage()">Send</button>
+                    <button id="stopBtn" onclick="stopGeneration()" style="display:none;">Stop</button>
+                </div>
+            </div>
+
+            <!-- Summarization Tab -->
+            <div id="summarize" class="tab-content">
+                <h1>Upload file to summarize</h1>
+                <input type="file" id="fileInputSum" accept=".txt,.pdf" />
+                <button id="uploadSumBtn" class="fancyBtn" onclick="uploadFile('summarize')">Upload & Summarize</button>
+                <div id="summaryOutput" class="output"></div>
+            </div>
+
+            <!-- Q&A Tab -->
+            <div id="qa" class="tab-content">
+                <h1>Upload file for Q&A</h1>
+                <input type="file" id="fileInputQA" accept=".txt,.pdf" />
+                <button id="uploadQABtn" class="fancyBtn" onclick="uploadFile('qa')">Upload File</button>
+            
+                <div id="qaSection" style="display:none; margin-top:15px;">
+                    <input type="text" id="qaQuestion" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'){askQuestion();}">
+                    <button id="askQABtn" class="fancyBtn" onclick="askQuestion()">Ask</button>
+                    <div id="qaOutput" class="output"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
